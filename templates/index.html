@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AroggaPath - Home</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@4.0.1/dist/css/multi-select-tag.min.css">
+
+    <style>
+  .myimg {
+    height: 60px;
+    width: 60px;                  /* ✅ Equal height and width */
+    object-fit: cover;            /* ✅ Ensures image fills circle cleanly */
+    border: 2px solid #1d18bb;
+    border-radius: 50%;           /* ✅ Makes it a circle */
+    background-color: white;      /* Optional: adds visibility if logo is light */
+    padding: 4px;
+  }
+</style>
+
+
+
+  </head>
+  <body>
+
+    {% include "navbar.html" %}
+
+    <!-- Hero Section -->
+    <section class="py-5 text-white" style="background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);">
+      <div class="container text-center">
+        <h1 class="display-4 fw-bold">Welcome to <span style="color: #ffdd57;">AroggaPath</span></h1>
+        <p class="lead mt-3">Your AI-powered personal health assistant. Select your symptoms and get expert guidance instantly.</p>
+        <div class="mt-4">
+          {% if not session.get('username') %}
+            <a href="{{ url_for('login') }}" class="btn btn-light btn-lg me-2">Log In</a>
+            <a href="{{ url_for('register') }}" class="btn btn-outline-light btn-lg">Register</a>
+          {% else %}
+            <a href="/profile" class="btn btn-light btn-lg">Go to Profile</a>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5">
+      <div class="container">
+        <div class="row text-center">
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Symptom Checker</h5>
+                <p class="card-text">Select multiple symptoms to get fast and accurate health predictions.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Personalized Advice</h5>
+                <p class="card-text">Get tailored descriptions, precautions, workouts, diets, and medications.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Trusted & Secure</h5>
+                <p class="card-text">Your data stays private. We’re committed to healthcare transparency and security.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Symptom Prediction Form -->
+    <div class="container my-5 p-4 bg-light rounded shadow">
+      <h2 class="mb-4 text-center text-primary">Check Your Symptoms</h2>
+      <form action="/predict" method="post">
+        <div class="form-group mb-3">
+          <label for="symptoms">Select Symptoms:</label>
+          <select id="symptoms" name="symptoms" multiple>
+            <!-- your options here -->
+            <option value="abdominal_pain">Abdominal pain</option>
+                <option value="abnormal_menstruation">Abnormal menstruation</option>
+                <option value="acidity">Acidity</option>
+                <option value="acute_liver_failure">Acute liver failure</option>
+                <option value="altered_sensorium">Altered sensorium</option>
+                <option value="anxiety">Anxiety</option>
+                <option value="back_pain">Back pain</option>
+                <option value="belly_pain">Belly pain</option>
+                <option value="blackheads">Blackheads</option>
+                <option value="bladder_discomfort">Bladder discomfort</option>
+                <option value="blister">Blister</option>
+                <option value="blood_in_sputum">Blood in sputum</option>
+                <option value="bloody_stool">Bloody stool</option>
+                <option value="blurred_and_distorted_vision">Blurred and distorted vision</option>
+                <option value="breathlessness">Breathlessness</option>
+                <option value="brittle_nails">Brittle nails</option>
+                <option value="bruising">Bruising</option>
+                <option value="burning_micturition">Burning micturition</option>
+                <option value="chest_pain">Chest pain</option>
+                <option value="chills">Chills</option>
+                <option value="cold_hands_and_feets">Cold hands and feets</option>
+                <option value="coma">Coma</option>
+                <option value="congestion">Congestion</option>
+                <option value="constipation">Constipation</option>
+                <option value="continuous_feel_of_urine">Continuous feel of urine</option>
+                <option value="continuous_sneezing">Continuous sneezing</option>
+                <option value="cough">Cough</option>
+                <option value="cramps">Cramps</option>
+                <option value="dark_urine">Dark urine</option>
+                <option value="dehydration">Dehydration</option>
+                <option value="depression">Depression</option>
+                <option value="diarrhoea">Diarrhoea</option>
+                <option value="dischromic _patches">Dischromic patches</option>
+                <option value="distention_of_abdomen">Distention of abdomen</option>
+                <option value="dizziness">Dizziness</option>
+                <option value="drying_and_tingling_lips">Drying and tingling lips</option>
+                <option value="enlarged_thyroid">Enlarged thyroid</option>
+                <option value="excessive_hunger">Excessive hunger</option>
+                <option value="extra_marital_contacts">Extra marital contacts</option>
+                <option value="family_history">Family history</option>
+                <option value="fast_heart_rate">Fast heart rate</option>
+                <option value="fatigue">Fatigue</option>
+                <option value="fluid_overload">Fluid overload</option>
+                <option value="foul_smell_of urine">Foul smell of urine</option>
+                <option value="headache">Headache</option>
+                <option value="high_fever">High fever</option>
+                <option value="hip_joint_pain">Hip joint pain</option>
+                <option value="history_of_alcohol_consumption">History of alcohol consumption</option>
+                <option value="increased_appetite">Increased appetite</option>
+                <option value="indigestion">Indigestion</option>
+                <option value="inflammatory_nails">Inflammatory nails</option>
+                <option value="internal_itching">Internal itching</option>
+                <option value="irregular_sugar_level">Irregular sugar level</option>
+                <option value="irritability">Irritability</option>
+                <option value="irritation_in_anus">Irritation in anus</option>
+                <option value="itching">Itching</option>
+                <option value="joint_pain">Joint pain</option>
+                <option value="knee_pain">Knee pain</option>
+                <option value="lack_of_concentration">Lack of concentration</option>
+                <option value="lethargy">Lethargy</option>
+                <option value="loss_of_appetite">Loss of appetite</option>
+                <option value="loss_of_balance">Loss of balance</option>
+                <option value="loss_of_smell">Loss of smell</option>
+                <option value="malaise">Lalaise</option>
+                <option value="mild_fever">Mild fever</option>
+                <option value="mood_swings">Mood swings</option>
+                <option value="mucoid_sputum">Mucoid sputum</option>
+                <option value="muscle_pain">Muscle pain</option>
+                <option value="muscle_wasting">Muscle wasting</option>
+                <option value="muscle_weakness">Muscle weakness</option>
+                <option value="nausea">Mausea</option>
+                <option value="neck_pain">Neck pain</option>
+                <option value="nodal_skin_eruptions">Nodal skin eruptions</option>
+                <option value="obesity">Obesity</option>
+                <option value="pain_behind_the_eyes">Pain behind the eyes</option>
+                <option value="pain_during_bowel_movements">Pain during bowel movements</option>
+                <option value="pain_in_anal_region">Pain in anal region</option>
+                <option value="painful_walking">Painful walking</option>
+                <option value="palpitations">Palpitations</option>
+                <option value="passage_of_gases">Passage of gases</option>
+                <option value="patches_in_throat">Patches in throat</option>
+                <option value="phlegm">Phlegm</option>
+                <option value="polyuria">Polyuria</option>
+                <option value="prominent_veins_on_calf">Prominent veins on calf</option>
+                <option value="puffy_face_and_eyes">Puffy face and eyes</option>
+                <option value="pus_filled_pimples">Pus filled pimples</option>
+                <option value="receiving_blood_transfusion">Receiving blood transfusion</option>
+                <option value="receiving_unsterile_injections">Receiving unsterile injections</option>
+                <option value="red_sore_around_nose">Red sore around nose</option>
+                <option value="red_spots_over_body">Red spots over body</option>
+                <option value="redness_of_eyes">Redness of eyes</option>
+                <option value="restlessness">Restlessness</option>
+                <option value="runny_nose">Runny nose</option>
+                <option value="rusty_sputum">Rusty sputum</option>
+                <option value="scurring">Scurring</option>
+                <option value="shivering">Shivering</option>
+                <option value="silver_like_dusting">Silver like dusting</option>
+                <option value="sinus_pressure">Sinus pressure</option>
+                <option value="skin_peeling">Skin peeling</option>
+                <option value="skin_rash">Skin rash</option>
+                <option value="slurred_speech">Slurred speech</option>
+                <option value="small_dents_in_nails">Small dents in nails</option>
+                <option value="spinning_movements">Spinning movements</option>
+                <option value="spotting_ urination">Spotting urination</option>
+                <option value="stiff_neck">Stiff neck</option>
+                <option value="stomach_bleeding">Stomachbleeding</option>
+                <option value="stomach_pain">Stomach pain</option>
+                <option value="sunken_eyes">Sunken eyes</option>
+                <option value="sweating">Sweating</option>
+                <option value="swelled_lymph_nodes">Swelled lymph nodes</option>
+                <option value="swelling_jointsmovement_stiffness">Swelling jointsmovement stiffness</option>
+                <option value="swelling_of_stomach">Swelling of stomach</option>
+                <option value="swollen_blood_vessels">Swollen blood vessels</option>
+                <option value="swollen_extremeties">Swollen extremeties</option>
+                <option value="swollen_legs">Swollen legs</option>
+                <option value="throat_irritation">Throat irritation</option>
+                <option value="toxic_look_(typhos)">Toxic look</option>
+                <option value="toxic_look_(typhos)">typhus</option>
+                <option value="ulcers_on_tongue">Ulcers on tongue</option>
+                <option value="unsteadiness">Unsteadiness</option>
+                <option value="visual_disturbances">Visual disturbances</option>
+                <option value="vomiting">Vomiting</option>
+                <option value="watering_from_eyes">Vatering from eyes</option>
+                <option value="weakness_in_limbs">Weakness in limbs</option>
+                <option value="weakness_of_one_body_side">Weakness of one body side</option>
+                <option value="weight_gain">Weight gain</option>
+                <option value="weight_loss">Weight loss</option>
+                <option value="yellow_crust_ooze">Yellow crust ooze</option>
+                <option value="yellow_urine">Yellow urine</option>
+                <option value="yellowing_of_eyes">Yellowing of eyes</option>
+                <option value="yellowish_skin">Yellowish skin</option>
+            <!-- add more as needed -->
+          </select>
+        </div>
+
+        <div name="mysysms" id="transcription"></div>
+        {% if message %}
+          <p>{{ message }}</p>
+        {% endif %}
+
+        <button type="submit" class="btn btn-danger btn-lg w-100 mt-3">Predict</button>
+      </form>
+    </div>
+
+{% if predicted_disease %}
+<section class="container my-5 p-4 shadow rounded bg-white">
+  <div class="text-center mb-5">
+    <h2 class="text-primary fw-bold">🧠 AI Prediction Results</h2>
+    <p class="text-muted">Personalized insights based on your selected symptoms</p>
+  </div>
+
+  <div class="row g-4">
+
+    <!-- Predicted Disease -->
+    <div class="col-md-6">
+      <div class="card border-2 border-danger shadow-sm h-100">
+        <div class="card-header bg-danger text-white">
+          <h5 class="mb-0">🩺 Predicted Disease</h5>
+        </div>
+        <div class="card-body">
+          <p class="fs-5 fw-bold text-danger text-center">{{ predicted_disease }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="col-md-6">
+      <div class="card border-info shadow-sm h-100">
+        <div class="card-header bg-info text-white">
+          <h5 class="mb-0">📋 Description</h5>
+        </div>
+        <div class="card-body">
+          <p class="text-muted">{{ dis_des }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Precautions -->
+    <div class="col-md-6">
+      <div class="card border-warning shadow-sm h-100">
+        <div class="card-header bg-warning text-dark">
+          <h5 class="mb-0">🚧 Precautions</h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            {% for p in my_precautions %}
+              <li class="list-group-item">⚠️ {{ p }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Medications -->
+    <div class="col-md-6">
+      <div class="card border-danger shadow-sm h-100">
+        <div class="card-header bg-danger text-white">
+          <h5 class="mb-0">💊 Medications</h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            {% for m in medications %}
+              <li class="list-group-item">💊 {{ m }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Workouts -->
+    <div class="col-md-6">
+      <div class="card border-success shadow-sm h-100">
+        <div class="card-header bg-success text-white">
+          <h5 class="mb-0">🏃 Recommended Workouts</h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            {% for w in workout %}
+              <li class="list-group-item">🏃 {{ w }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Diets -->
+    <div class="col-md-6">
+      <div class="card border-secondary shadow-sm h-100">
+        <div class="card-header bg-secondary text-white">
+          <h5 class="mb-0">🥗 Recommended Diet</h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            {% for d in my_diet %}
+              <li class="list-group-item">🥗 {{ d }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endif %}
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<!-- End of <body> -->
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@4.0.1/dist/js/multi-select-tag.min.js"></script>
+
+    <script>
+        var tagSelector = new MultiSelectTag('symptoms', {
+            maxSelection: 10,              // default unlimited.
+            required: true,               // default false.
+            placeholder: 'Search tags',   // default 'Search'.
+            onChange: function(selected) { // Callback when selection changes.
+                console.log('Selection changed:', selected);
+            }
+        });
+    </script>
+
+</body>
+
+</html>

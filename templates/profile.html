@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profile | AroggaPath</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    .myimg {
+      height: 60px;
+      width: 60px;
+      object-fit: cover;
+      border: 2px solid #1d18bb;
+      border-radius: 50%;
+      background-color: white;
+      padding: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  {% include "navbar.html" %}
+
+  <section class="py-5 bg-light">
+    <div class="container d-flex justify-content-center">
+      <div class="card shadow-sm p-4" style="max-width: 450px; width: 100%;">
+        <h3 class="text-center text-primary fw-bold mb-4">👤 Your Profile</h3>
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <div class="text-center mt-4">
+          <a href="{{ url_for('logout') }}" class="btn btn-outline-primary">Log Out</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+<h5 class="mt-4">📝 Prediction History</h5>
+{% if predictions %}
+  <div class="row g-3 mt-2">
+    {% for p in predictions %}
+      <div class="col-md-6">
+        <div class="card shadow-sm border-0 h-100">
+          <div class="card-body">
+            <h5 class="card-title text-primary">🩺 {{ p['disease'] }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ p['timestamp'] }}</h6>
+            <p class="mb-1"><strong>Description:</strong><br>{{ p['description'] or '—' }}</p>
+            <p class="mb-0"><strong>Medications:</strong><br>{{ p['medications'] or '—' }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="text-muted">No predictions recorded yet.</p>
+{% endif %}
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
