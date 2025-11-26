@@ -1,1 +1,8 @@
-
+Flask
+gunicorn
+Werkzeug
+WTForms
+Flask-WTF
+pandas
+numpy
+scikit-learn
