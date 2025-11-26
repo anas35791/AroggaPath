@@ -1,0 +1,32 @@
+/* static/css/shop.css */
+
+.medicine-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  height: auto;
+}
+
+.medicine-card:hover {
+  transform: scale(1.02);
+}
+
+.medicine-img {
+  width: 100%;
+  height: auto; /* let the image define its height */
+  object-fit: contain;
+  padding: 10px;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.medicine-title {
+  color: #1d18bb;
+  font-weight: bold;
+}
+
+.medicine-price {
+  color: #28a745;
+  font-weight: 600;
+}
