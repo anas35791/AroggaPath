@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shop | AroggaPath</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/shop.css') }}">
+
+  <style>
+    .myimg {
+      height: 60px;
+      width: 60px;
+      object-fit: cover;
+      border: 2px solid #1d18bb;
+      border-radius: 50%;
+      background-color: white;
+      padding: 4px;
+    }
+  </style>
+</head>
+<body>
+
+{% include "navbar.html" %}
+
+<div class="container my-5">
+  <h2 class="text-center text-primary mb-4">🛍️ Medicine Store</h2>
+
+  <div class="text-end mb-4">
+    <a href="{{ url_for('view_cart') }}" class="btn btn-success">
+      🛒 View Cart
+    </a>
+  </div>
+
+  <div class="row g-4">
+    {% for product in products %}
+    <div class="col-md-4">
+      <div class="card medicine-card h-100">
+        {% if product['image'] %}
+          <img src="{{ url_for('static', filename='images/medicines/' + product['image']) }}" class="medicine-img card-img-top" alt="{{ product['name'] }}">
+        {% else %}
+          <img src="{{ url_for('static', filename='images/medicines/default.jpg') }}" class="medicine-img card-img-top" alt="No Image Available">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title medicine-title">{{ product['name'] }}</h5>
+          <p class="card-text"><strong>Disease:</strong> {{ product['disease'] }}</p>
+          <p class="card-text">{{ product['description'] or 'No description.' }}</p>
+          <p class="card-text medicine-price">Price: {{ product['price'] }} taka</p>
+          <a href="{{ url_for('add_to_cart', medicine_id=product['id']) }}" class="btn btn-outline-primary w-100">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Footer -->
+    <footer class="bg-dark text-white py-5 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5>About AroggaPath</h5>
+                    <p>Your AI-powered health assistant providing instant symptom analysis and personalized health recommendations.</p>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ url_for('about') }}" class="text-white-50">About Us</a></li>
+                        <li><a href="{{ url_for('contact') }}" class="text-white-50">Contact</a></li>
+                        <li><a href="{{ url_for('blog') }}" class="text-white-50">First Aid</a></li>
+                        <li><a href="{{ url_for('shop') }}" class="text-white-50">Shop</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Contact Us</h5>
+                    <p><i class="fas fa-envelope me-2"></i> support@aroggapath.com</p>
+                    <p><i class="fas fa-phone me-2"></i> +8801521774589</p>
+                    <div class="mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 AroggaPath. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

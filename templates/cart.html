@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cart | AroggaPath</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    .myimg {
+      height: 60px;
+      width: 60px;
+      object-fit: cover;
+      border: 2px solid #1d18bb;
+      border-radius: 50%;
+      background-color: white;
+      padding: 4px;
+    }
+    .cart-summary {
+      background-color: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px solid #dee2e6;
+    }
+    .table th, .table td {
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+  {% include "navbar.html" %}
+
+  <div class="container my-5">
+    <h2 class="text-center text-primary mb-4"><i class="bi bi-cart4 me-2"></i>Your Cart</h2>
+
+    {% if items %}
+      <div class="row">
+        <div class="col-lg-8">
+          <table class="table table-striped align-middle shadow-sm">
+            <thead class="table-light">
+              <tr>
+                <th>Medicine</th>
+                <th>Price (৳)</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% set ns = namespace(total=0) %}
+              {% for item in items %}
+              <tr>
+                <td>{{ item['name'] }}</td>
+                <td>৳{{ "%.2f"|format(item['price']) }}</td>
+                <td>{{ item['quantity'] }}</td>
+                <td>৳{{ "%.2f"|format(item['price'] * item['quantity']) }}</td>
+                {% set ns.total = ns.total + (item['price'] * item['quantity']) %}
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="cart-summary shadow-sm">
+            <h5 class="mb-3">🧾 Order Summary</h5>
+            <p class="mb-1">Items: <strong>{{ items|length }}</strong></p>
+            <p class="mb-2">Subtotal: <strong>৳{{ "%.2f"|format(ns.total) }}</strong></p>
+            <hr>
+            <h5 class="fw-bold">Total: ৳{{ "%.2f"|format(ns.total) }}</h5>
+            <div class="d-grid gap-2 mt-4">
+              <a href="{{ url_for('shop') }}" class="btn btn-outline-primary">
+                <i class="bi bi-arrow-left-circle me-1"></i> Continue Shopping
+              </a>
+              <a href="{{ url_for('checkout') }}" class="btn btn-success">
+                <i class="bi bi-credit-card-2-back me-1"></i> Proceed to Checkout
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    {% else %}
+      <div class="text-center mt-5">
+        <i class="bi bi-cart-x fs-1 text-secondary"></i>
+        <p class="text-muted mt-3 fs-5">Oops! Your cart is empty.</p>
+        <a href="{{ url_for('shop') }}" class="btn btn-primary">
+          <i class="bi bi-bag-plus me-1"></i> Start Shopping
+        </a>
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Footer -->
+    <footer class="bg-dark text-white py-5 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5>About AroggaPath</h5>
+                    <p>Your AI-powered health assistant providing instant symptom analysis and personalized health recommendations.</p>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ url_for('about') }}" class="text-white-50">About Us</a></li>
+                        <li><a href="{{ url_for('contact') }}" class="text-white-50">Contact</a></li>
+                        <li><a href="{{ url_for('blog') }}" class="text-white-50">First Aid</a></li>
+                        <li><a href="{{ url_for('shop') }}" class="text-white-50">Shop</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Contact Us</h5>
+                    <p><i class="fas fa-envelope me-2"></i> support@aroggapath.com</p>
+                    <p><i class="fas fa-phone me-2"></i> +8801521774589</p>
+                    <div class="mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 AroggaPath. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

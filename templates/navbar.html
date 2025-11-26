@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a href="{{ url_for('index') }}" class="navbar-brand d-flex align-items-center">
+      <img class="myimg me-2" src="{{ url_for('static', filename='aroggapath_logo.png') }}" alt="Logo">
+      <span class="fw-bold text-white">AroggaPath</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('developer') }}">Developer</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('blog') }}">First Aid</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('shop') }}">🛒 Shop</a></li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        {% if session.get('username') and is_admin_safe() %}
+          <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('admin_dashboard') }}">🛠️ Admin</a>
+          </li>
+        {% endif %}
+
+
+        {% if session.get('username') %}
+          <li class="nav-item">
+          <a class="nav-link text-white" href="{{ url_for('profile') }}">
+            👤 {{ session['username'] }}
+           </a>
+        </li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Log out</a></li>
+        {% else %}
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Log In</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Register</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
